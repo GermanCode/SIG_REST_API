@@ -17,6 +17,14 @@ router.get('/', function (req, res, next) {
   );
 });
 
+router.get('/sitios', function (req, res, next) {
+  res.render('sitios', {
+    title: 'Sitios de reservas naturales'
+  }
+  );
+});
+
+
 router.get('/mapa', function (req, res, next) {
   res.render('mapa', {
     title: 'Reservas Putumayo'
