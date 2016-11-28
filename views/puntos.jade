@@ -1,0 +1,62 @@
+doctype html
+html
+    head
+        link(rel='stylesheet', href='https://unpkg.com/leaflet@1.0.2/dist/leaflet.css')
+        script(src='https://unpkg.com/leaflet@1.0.2/dist/leaflet.js')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+
+        style.
+            #mapid {
+                height: 400px;
+            }
+            #info {
+                width:250px;
+                height:100px;
+                background:rgba(255, 255, 255, 0.7);
+                border: 1px solid #617EF6;
+                border-radius:5px;
+                position:fixed;
+                top:200px;
+                left:calc(50% - 125px);
+                margin:auto;
+                padding:10px;
+                color:#617EF6;
+            }
+    body
+        #mapid
+
+        #info
+            h2 Waiting for the Ajax Callback...
+
+
+        script.
+            // Create the map
+            var map = L.map('mapid').setView([1.6189118,-75.6213517], 5);
+
+            // Set up the OSM layer
+            L.tileLayer(
+                'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 18
+                }
+            ).addTo(map);
+
+            $.ajax({
+                type: "GET",
+                url: 'https://appsig2.herokuapp.com/data',
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+                    response.type = "FeatureCollection";
+
+                    var markers = response.features;
+
+                    console.log('markers: ', markers)
+
+                    for ( var i=0; i < markers.length; ++i ) 
+                    {
+                        L.marker([markers[i].geometry.coordinates[1], markers[i].geometry.coordinates[0]])
+                            .bindPopup( '<a href="' + markers[i].properties.f1 + '" target="_blank">' + markers[i].properties.f2 + '</a>' )
+                            .addTo( map );
+                    }
+                }
+            });

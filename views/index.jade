@@ -1,8 +1,133 @@
 extends layout
 
-block content
-  h1= title
-  p Bienvenido a #{title}
-  a(href='/data') Ver datos geograficos (JSON)
-  br
-  a(href='/tabla') Ver tabla de datos
+block content      
+    // banner
+    .banner
+      // header
+      // header-bottom
+      .header
+        .header-top
+          .container
+            .logo
+              h1
+                a(href='index.html') Puntos De Accidentalidad
+            .clearfix
+        .container
+          .header-bottom
+            nav.navbar.navbar-default(role='navigation')
+              .navbar-header
+                button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                  span.sr-only Toggle navigation
+                  span.icon-bar
+                  span.icon-bar
+                  span.icon-bar
+              // /.navbar-header
+              #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                ul.nav.navbar-nav
+                  li.active
+                    a(href='/') Inicio
+                  li
+                    a(href='/puntos') Puntos
+              // /.navbar-collapse
+      // /header-bottom
+      // header
+      // banner-info
+      .container
+        section.slider
+          .flexslider
+            ul.slides
+              li
+                .banner-info
+                  h2 Sistemas de Informacion Geografica
+              li
+                .banner-info
+                  h2 Sabe cuales son los puntos más criticos de la ciudad?
+              li
+                .banner-info
+                  h2 Información vial actualizada
+        // FlexSlider
+        script(defer='', src='js/jquery.flexslider.js')
+        script(type='text/javascript').
+          $(function(){
+          });
+          $(window).load(function(){
+          $('.flexslider').flexslider({
+          animation: "slide",
+          start: function(slider){
+          $('body').removeClass('loading');
+          }
+          });
+          });
+        // FlexSlider
+        // banner-info
+    // banner
+    // show
+    .show
+      .container
+        .col-md-4.show-left
+          .col-md1
+            a.b-link-stripe.b-animate-go.thickbox(href='#')
+              img.img-responsive(src='images/3.jpg', alt=' ')
+              .b-wrapper
+                h3.b-animate.b-from-top.top-in1.b-delay03
+          h4 Sistemas De Información Geografica
+          p
+            | Un sistema de información geográfica (también conocido con los acrónimos SIG en español o GIS en inglés) es un conjunto de herramientas que integra y relaciona diversos componentes (usuarios, hardware, software, procesos) que permiten la organización, almacenamiento, manipulación, análisis y modelización de grandes cantidades de datos procedentes del mundo real que están vinculados a una referencia espacial, facilitando la incorporación de aspectos sociales-culturales, económicos y ambientales que conducen a la toma de decisiones de una manera más eficaz.
+        .col-md-4.show-left
+          .col-md1
+            a.b-link-stripe.b-animate-go.thickbox(href='#')
+              img.img-responsive(src='images/9.jpg', alt=' ')
+              .b-wrapper
+                h3.b-animate.b-from-top.top-in1.b-delay03
+          h4 Sabe Cuales Son Los Puntos Más Criticos De La Ciudad?
+          p
+            | por lo menos 30 sitios críticos en materia de accidentalidad vial, según revelan las cifras de la Secretaría de Tránsito. De los 4885 incidentes que se reportaron entre enero y abril del 2015, buena parte se concentraron en vías como la Calle 70 y la Autopista Simón Bolívar, los dos sitios ‘campeones’ en cuanto a choques. Otras vías, como la Avenida 2N, la Carrera 1 y la Calle 36 están entre las más problemáticas.
+        .col-md-4.show-left
+          .col-md1
+            a.b-link-stripe.b-animate-go.thickbox(href='#')
+              img.img-responsive(src='images/13.jpg', alt=' ')
+              .b-wrapper
+                h3.b-animate.b-from-top.top-in1.b-delay03
+          h4 Información Vial Actualizada
+          p
+            | A través de los usuarios @transitopolicia y @numeral767 tanto la Policía de Carreteras como el Ministerio de Transporte pretenden orientar a los usuarios de las vías para que estos tomen la mejor decisión a la hora de viajar por alguna de las carreteras del país.
+        .clearfix
+    // show
+    // footer
+    .footer
+      .container
+        .footer-top
+          .col-md-3.footer-left
+            h4 Direccion
+            address
+              | Calle 16 B/ Rincon de la Estrella
+              br
+              | 							Florencia-Caquetá
+              br
+              abbr(title='Phone') P :
+              |  (313) 293-4375
+          .col-md-6.footer-middle
+            h4 Contactenos
+            form
+              .ft-lt
+                input(type='text', value='Primer Nombre', placeholder='', onfocus="this.value='';", onblur="if (this.value == '') {this.value = 'First Name';}")
+                input(type='text', value='Segundo Nombre', placeholder='', onfocus="this.value='';", onblur="if (this.value == '') {this.value = 'Last Name';}")
+                input(type='text', value='Correo Electronico', placeholder='', onfocus="this.value='';", onblur="if (this.value == '') {this.value = 'Email Address';}")
+              .ft-rgt
+                textarea(placeholder='', onfocus="this.value='';", onblur="if (this.value == '') {this.value = 'Message';}") Mensaje
+                input(type='submit', value='Enviar')
+          .col-md-3.footer-left
+            h4 Siguenos en:
+            .soci
+              a(href='#')
+                i.f-1  
+              a(href='#')
+                i.t-1  
+              a(href='#')
+                i.g-1  
+          .clearfix
+        .footer-text
+          p
+            | © 2016 Moduls. All Rights Reserved | Design by  
+            a(href='http://w3layouts.com/', target='_blank') W3layouts
+    // footer

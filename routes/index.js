@@ -3,27 +3,24 @@ var router = express.Router();
 
 var pg = require('pg');
 
-pg.defaults.ssl = process.env.DATABASE_URL != undefined;
-var conString = process.env.DATABASE_URL || "postgres://postgres:root@localhost/proyecto_sig"; // Cadena de conexión a la base de datos
+pg.defaults.ssl = true;
+var conString = process.env.DATABASE_URL || "postgres://tiwntpmqhwcvbn:8a_RhEeMB-5aZXog4UXcHP0TpO@ec2-50-16-218-45.compute-1.amazonaws.com:5432/dbttmr3g8d7ntq"; // Cadena de conexión a la base de datos
 
 // Set up your database query to display GeoJSON
-var coffee_query = "SELECT row_to_json(fc) FROM ( SELECT array_to_json(array_agg(f)) As Datos FROM (" +
-    "SELECT ST_AsGeoJSON(lg.geom)::json As geometry, row_to_json((id, name)) As prope" +
-    "rties FROM cambridge_coffee_shops As lg) As f) As fc";
-
-/*
-SELECT row_to_json(fc) FROM (
-	SELECT array_to_json(array_agg(f)) As features FROM (
-		SELECT ST_AsGeoJSON(lg.geom)::json As geometry,
-		row_to_json((id, name)) As properties FROM cambridge_coffee_shops As lg
-	) As f
-) As fc
-*/
+var coffee_query = 'SELECT row_to_json(fc) FROM (	SELECT array_to_json(array_agg(f)) As features FROM (	SELECT ST_AsGeoJSON(lg.geom)::json As geometry,	row_to_json((gid, name)) As properties FROM public."reservas_putumayo" As lg) As f) As fc';
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', {
-    title: 'Postgis & NodeJS'}
+    title: 'Reservas Putumayo'
+  }
+  );
+});
+
+router.get('/puntos', function (req, res, next) {
+  res.render('puntos', {
+    title: 'Reservas Putumayo'
+  }
   );
 });
 
@@ -52,7 +49,7 @@ router.get('/tabla', function (req, res) {
   query.on("end", function (result) {
     res.render('tabla', {
       title: 'Tabla de datos',
-      datos: result.rows[0].row_to_json.datos
+      datos: result.rows
     });
   });
 });
