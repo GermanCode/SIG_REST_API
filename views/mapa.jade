@@ -1,0 +1,103 @@
+doctype html
+html(lang='en')
+  head
+    title Reservas Naturales en el Putumayo
+    meta(charset='utf-8')
+    link(rel='stylesheet', href='https://unpkg.com/leaflet@1.0.2/dist/leaflet.css')
+    script(src='https://unpkg.com/leaflet@1.0.2/dist/leaflet.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    link(rel='stylesheet', href='stylesheets/reset.css', type='text/css', media='all')
+    link(rel='stylesheet', href='stylesheets/style.css', type='text/css', media='all')
+    script(type='text/javascript', src='javascripts/jquery-1.4.2.min.js')
+    script(type='text/javascript', src='javascripts/cufon-yui.js')
+    script(type='text/javascript', src='javascripts/Humanst521_BT_400.font.js')
+    script(type='text/javascript', src='javascripts/Humanst521_Lt_BT_400.font.js')
+    script(type='text/javascript', src='javascripts/roundabout.js')
+    script(type='text/javascript', src='javascripts/roundabout_shapes.js')
+    script(type='text/javascript', src='javascripts/gallery_init.js')
+    script(type='text/javascript', src='javascripts/cufon-replace.js')
+    //if lt IE 7
+      link(rel='stylesheet', href='css/ie/ie6.css', type='text/css', media='all')
+    //if lt IE 9
+      script(type='text/javascript', src='js/html5.js')
+      script(type='text/javascript', src='js/IE9.js')
+  body
+    // header
+    header
+      .container
+        h1
+          a(href='index.html') Reservas Naturales Putumayo
+        nav
+          ul
+            li
+              a.current(href='index.jade') Inicio
+            li
+              a(href='about.html') Mapa
+            li
+              a(href='Sitios.html') Sitios
+            li
+              a(href='gallery.html') Ayuda
+    // #gallery
+    section#gallery
+      .container
+        div(id="mapid")
+
+
+      style.
+            #mapid {
+                height: 400px;
+            }
+            #info {
+                width:250px;
+                height:100px;
+                background:rgba(255, 255, 255, 0.7);
+                border: 1px solid #617EF6;
+                border-radius:5px;
+                position:fixed;
+                top:200px;
+                left:calc(50% - 125px);
+                margin:auto;
+                padding:10px;
+                color:#617EF6;
+            }
+
+    script.
+            // Create the map
+            var map = L.map('mapid').setView([1.6189118,-75.6213517], 5);
+
+            // Set up the OSM layer
+            L.tileLayer(
+                'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 18
+                }
+            ).addTo(map);
+
+            $.ajax({
+                type: "GET",
+                url: 'https://appsig2.herokuapp.com/data',
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+                    response.type = "FeatureCollection";
+
+                    var markers = response.features;
+
+                    console.log('markers: ', markers)
+
+                    for ( var i=0; i < markers.length; ++i ) 
+                    {
+                        L.marker([markers[i].geometry.coordinates[1], markers[i].geometry.coordinates[0]])
+                            .bindPopup( '<a href="' + markers[i].properties.f1 + '" target="_blank">' + markers[i].properties.f2 + '</a>' )
+                            .addTo( map );
+                    }
+                }
+            });
+
+    ul#myRoundabout
+    // /#gallery
+    // footer
+    footer
+    .container
+        .wrapper
+    script(type='text/javascript').
+        Cufon.now();

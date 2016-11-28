@@ -17,8 +17,8 @@ router.get('/', function (req, res, next) {
   );
 });
 
-router.get('/puntos', function (req, res, next) {
-  res.render('puntos', {
+router.get('/mapa', function (req, res, next) {
+  res.render('mapa', {
     title: 'Reservas Putumayo'
   }
   );
