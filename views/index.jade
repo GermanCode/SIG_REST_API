@@ -1,9 +1,10 @@
-extends layout
-
+doctype html
+html(lang='en')
+  head
     title Reservas Naturales en el Putumayo
     meta(charset='utf-8')
-    link(rel='stylesheet', href='stylesheets/reset.css', type='text/css', media='all')
-    link(rel='stylesheet', href='stylesheets/style.css', type='text/css', media='all')
+    link(rel='stylesheet', href='css/reset.css', type='text/css', media='all')
+    link(rel='stylesheet', href='css/style.css', type='text/css', media='all')
     script(type='text/javascript', src='js/jquery-1.4.2.min.js')
     script(type='text/javascript', src='js/cufon-yui.js')
     script(type='text/javascript', src='js/Humanst521_BT_400.font.js')
@@ -17,40 +18,40 @@ extends layout
     //if lt IE 9
       script(type='text/javascript', src='js/html5.js')
       script(type='text/javascript', src='js/IE9.js')
-    body
-      // header
-      header
-        .container
-          h1
-            a(href='index.html') Reservas Naturales Putumayo
-          nav
-            ul
-              li
-                a.current(href='index.html') Inicio
-              li
-                a(href='Mapa.html') Mapa
-              li
-                a(href='Sitios.html') Sitios
-              li
-                a(href='gallery.html') Ayuda
-      // #gallery
-      section#gallery
-        .container
-          ul#myRoundabout
+  body
+    // header
+    header
+      .container
+        h1
+          a(href='index.html') Reservas Naturales Putumayo
+        nav
+          ul
             li
-              img(src='images/findelmundo2.jpg', alt='')
+              a.current(href='index.html') Inicio
             li
-              img(src='images/indio2.jpg', alt='')
+              a(href='Mapa.html') Mapa
             li
-              img(src='images/hornoyaco2.jpg', alt='')
+              a(href='Sitios.html') Sitios
             li
-              img(src='images/cea2.jpg', alt='')
-            li
-              img(src='images/acuario2.jpg', alt='')
-      // /#gallery
-      // footer
-      footer
-        .container
-          .wrapper
-      script(type='text/javascript').
-        Cufon.now();
+              a(href='gallery.html') Ayuda
+    // #gallery
+    section#gallery
+      .container
+        ul#myRoundabout
+          li
+            img(src='images/findelmundo2.jpg', alt='')
+          li
+            img(src='images/indio2.jpg', alt='')
+          li
+            img(src='images/hornoyaco2.jpg', alt='')
+          li
+            img(src='images/cea2.jpg', alt='')
+          li
+            img(src='images/acuario2.jpg', alt='')
+    // /#gallery
+    // footer
+    footer
+      .container
+        .wrapper
+    script(type='text/javascript').
+      Cufon.now();
